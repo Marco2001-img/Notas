@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Pagos Pendientes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Pagos Pendientes</h1>
+   <div class="row">
+            <div class="col-6">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <label>Titulo Del Pago</label>
+                        <input type="text" class="form-control">
+
+                        <label>Descripcion</label>
+                        <input type="text" class="form-control">
+
+                        <label>Fecha De Pago</label>
+                        <input type="date" class="form-control">
+
+                        <label>Costo</label>
+                        <input type="text" class="form-control">
+
+                        <button type="button" class="btn btn-dark my-3">Añadir Pago</button>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre Del Pago</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Pago</th>
+      <th scope="col">Fecha</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td><a href="#" class="btn btn-success"><i class="bi bi-check-lg"></i></td></a> 
+      <td><a href="{% url 'modificar_pago' %}" class="btn btn-warning"><i class="bi bi-eye-fill"></i></td></a> 
+    </tr>
+  </tbody>
+</table>
+
+            </div>
+        </div>
+   </div>
+</div>
+{% endblock %}

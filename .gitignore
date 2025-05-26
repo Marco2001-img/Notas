@@ -1,0 +1,79 @@
+# === Entorno virtual ===
+env/
+venv/
+ENV/
+.venv/
+*.pyc
+__pycache__/
+
+# === Archivos de configuración del sistema operativo ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# === Archivos de logs y bases de datos temporales ===
+*.log
+*.sqlite3  # ya no usas sqlite, pero lo dejamos por si acaso
+*.pgsql
+*.pgsql.sql
+*.psql
+*.sql
+*.dump
+*.bak
+
+# === Archivos de migración que no quieres subir (opcional) ===
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# === Archivos de compilación de Python ===
+*.py[cod]
+*$py.class
+
+# === Configuración del editor ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# === Archivos de pruebas / coverage ===
+htmlcov/
+.coverage
+.tox/
+nosetests.xml
+test-results.xml
+coverage.xml
+*.cover
+*.pytest_cache/
+
+# === Archivos estáticos recolectados ===
+staticfiles/
+static/
+
+# === Archivos temporales ===
+*.tmp
+*.bak
+*.swp
+*.~ 
+*.orig
+
+# === Media (subidas de usuario) ===
+media/
+
+# === Archivos de entorno ===
+.env
+.env.*
+
+# === Node (si usas npm o frontend en Django) ===
+node_modules/
+package-lock.json
+
+# === Compilación de CSS o JS ===
+*.map
+
+# === Archivos comprimidos ===
+*.zip
+*.tar.gz
+*.rar
+*.7z

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-bdoy p-4">
+                        
+                        <h1><i class="bi bi-plus-lg"></i> Nueva Nota</h1>
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                        <label class="form-check-label" for="checkDefault">
+                            IVA
+                        </label>
+                        </div>
+                        
+                        <div class="row mt-5">
+                            <div class="col-md-6 mb-3">
+                            <label class="form-label">NO De trabajo</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Contacto</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        </div>
+
+                        <div class="row">
+                           
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">telefono</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Fecha</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Tipo</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Entrega</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Pago</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                                <option value="1">Trasferencia</option>
+                                <option value="2">Tarjeta De Credito</option>
+                                <option value="3">Tarjeta De Debito</option>
+                                <option value="3">Efectivo</option>
+                            </select>
+                        </div>
+                        </div>
+                        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre Del Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Anticipo</th>
+      <th scope="col">
+        Total
+        
+    </th>
+    <th>
+        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+    </th>
+    </tr>
+  </thead>
+  <tbody>
+    
+  </tbody>
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Nota</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Producto</label>
+        <input type="text" class="form-control">
+
+        <label class="form-label">Cantidad</label>
+        <input type="text" class="form-control">
+
+        <label class="form-label">Precio</label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

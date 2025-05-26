@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-bdoy p-4">
+                        
+                        <h1>Nuevo Empleado</h1>
+                        
+                        <div class="d-flex gap-3 mt-5">
+                            <input type="text" class="form-control" placeholder="Nombre">
+                            <input type="text" class="form-control" placeholder="Edad">
+                        </div>
+                        
+                        <div class="d-flex gap-3 my-2">
+                            <input type="text" class="form-control" placeholder="Apellido Paterno">
+                            <input type="text" class="form-control" placeholder="Apellido Materno">
+                        </div>
+                        
+                        <div class="d-flex gap-3 my-2">
+                            <input type="text" class="form-control" placeholder="Telefono">
+                            <input type="text" class="form-control" placeholder="Cargo">
+                        </div>
+                        
+                        <div class="d-flex gap-3 my-2">
+                            <input type="text" class="form-control" placeholder="Numero De Cuenta">
+                            <input type="text" class="form-control" placeholder="Nombre De Banco">
+                        </div>
+
+                        <div class="d-flex justify-content-center my-4">
+                           <button type="button" class="btn btn-outline-dark">Añadir Empleado</button>
+
+                        </div>
+                
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

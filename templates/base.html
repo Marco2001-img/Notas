@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<!-- Navbar superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+      <!-- Notificaciones -->
+        <a class="nav-link text-white position-relative" href="#">
+      <i class="bi bi-bell"></i>
+       </a>
+      <!-- Perfil -->
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+              👤 Usuario
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    
+    <!-- Sidebar -->
+    <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse min-vh-100">
+      <div class="position-sticky pt-3">
+        <h4 class="text-white text-center py-3">Publig</h4>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">🏠 Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'lista_empleados' %}">👤 Empleados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'misClientes' %}">🧑‍💼 Clientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'ver_pago' %}">💸 Pagos Pendientes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'Ver_nota' %}">📝 Notas</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+      {% block content %}
+      <!-- Aquí va el contenido dinámico -->
+      {% endblock %}
+    </main>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

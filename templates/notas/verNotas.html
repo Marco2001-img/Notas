@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4 text-success">
+            <i class="bi bi-caret-right-fill"></i> Mis Notas 
+    </h2> 
+    <input type="text" class="form-control" placeholder="BUSCAR">
+    <div class="row mt-5">
+       <div class="col-10">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre Del Cliente</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Domicilio</th>
+      <th scope="col">Nombre Del Trabajo</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Anticipo</th>
+      <th scope="col">Resta</th>
+      <th scope="col">Pago Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>4212626</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>4212626</td>
+      <td><a href="{% url 'actualizar_nota' %}" class="btn btn-success"><i class="bi bi-eye-fill"></i></a></td>
+      <td><a href="{% url 'agregar_nota' %}" class="btn btn-info"><i class="bi bi-plus-lg"></i></a></td>
+      <td><a href="#" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a></td>
+       
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

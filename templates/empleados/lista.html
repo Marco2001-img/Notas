@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4 text-success">
+        <i class="bi bi-cash-coin"></i>
+        Lista De Empleados 
+       
+            <a href="{% url 'nuevo_empleados' %}" class="btn btn-info"><i class="bi bi-plus-lg"></i></a>
+
+    </h2> 
+    <div class="row mt-5">
+       <div class="col-10">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre Del Empleado</th>
+      <th scope="col">Salario</th>
+      <th scope="col">Cargo</th>
+      <th scope="col">Telefono</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>4212626</td>
+      <td><a href="{% url 'modificar_empleados' %}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a></td>
+      <td><a href="#" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a></td>
+       
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
