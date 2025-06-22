@@ -10,24 +10,30 @@
                 <div class="card p-4">
                     <div class="card-body">
                         <label>Titulo Del Pago</label>
-                        <input type="text" class="form-control">
-
-                        <label>Descripcion</label>
-                        <input type="text" class="form-control">
-
-                        <label>Fecha De Pago</label>
-                        <input type="date" class="form-control">
-
-                        <label>Costo</label>
-                        <input type="text" class="form-control">
-
-                        <button type="button" class="btn btn-dark my-3">Actualizar Pago</button>
-
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-dark my-3">Actualizar Pago</button>
+                            </form>
                     </div>
                 </div>
-
             </div>
-
    </div>
+
+   {% if messages %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  {% for message in messages %}
+  Swal.fire({
+    title: "Éxito",
+    text: "{{ message|escapejs }}",
+    icon: "success",
+    confirmButtonText: "OK"
+  });
+  {% endfor %}
+});
+</script>
+{% endif %}
+
 </div>
 {% endblock %}

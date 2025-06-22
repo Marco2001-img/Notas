@@ -8,6 +8,8 @@
             <i class="bi bi-caret-right-fill"></i> Mis Clientes 
             
     </h2> 
+    <a href="{% url 'clientes_pdf' %}" class="btn btn-danger" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+
     <div class="row mt-5">
        <div class="col-10">
         <table class="table">
@@ -24,17 +26,19 @@
     </tr>
   </thead>
   <tbody>
+  {% for cliente in clientes %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>4212626</td>
-      <td><a href="{% url 'ActualizarClientes' %}" class="btn btn-success"><i class="bi bi-eye-fill"></i></a></td>
-      <td><a href="#" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a></td>
+      <th>{{ forloop.counter }}</th>
+      <td>{{ cliente.nombre }}</td>
+      <td>{{ cliente.rfc }}</td>
+      <td>{{ cliente.telefono }}</td>
+      <td>{{ cliente.domicilio }}</td>
+      <td><a href="{% url 'ActualizarClientes' cliente.id  %}" class="btn btn-success"><i class="bi bi-eye-fill"></i></a></td>
+      <td><a href="{% url 'EliminarClientes' cliente.id  %}" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a></td>
       <td><a href="{% url 'AgregarsClientes' %}" class="btn btn-info"><i class="bi bi-plus-lg"></i></a></td>
        
     </tr>
+     {% endfor %}
   </tbody>
 </table>
         </div>

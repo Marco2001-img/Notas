@@ -1,0 +1,88 @@
+{% load format_numbers %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nota {{ nota.no_trabajo }}</title>
+
+    <style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Para forzar que el ancho de las columnas sea respetado */
+    word-wrap: break-word;
+  }
+
+  th, td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+    white-space: normal;
+    word-break: break-word; /* Para cortar palabras largas */
+    overflow-wrap: break-word;
+  }
+
+  colgroup col:nth-child(1) {
+    width: 50%; /* Más ancho para el nombre del producto */
+  }
+  colgroup col:nth-child(2),
+  colgroup col:nth-child(3),
+  colgroup col:nth-child(4) {
+    width: 16.66%;
+  }
+
+  td:first-child {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    margin: 20px;
+  }
+</style>
+
+</head>
+<body>
+    <p class="fs-1 fw-semibold text-success ">PUBLIG</p>
+    <h1>Nota {{ nota.no_trabajo }}</h1>
+    <p><strong>Contacto:</strong> {{ nota.contacto }}</p>
+    <p><strong>Teléfono:</strong> {{ nota.telefono }}</p>
+    <p><strong>Fecha:</strong> {{ nota.fecha }}</p>
+    
+<table>
+  <colgroup>
+    <col />
+    <col />
+    <col />
+    <col />
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for p in nota.productos.all %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.cantidad|floatformat:0 }}</td>
+      <td>${{ p.precio|formatear_numero_ingles }}</td>
+      <td>${{ p.total|formatear_numero_ingles }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+   <p><strong>Anticipo:</strong> ${{ nota.anticipo|formatear_numero_ingles }}</p>
+    <p><strong>Total:</strong> ${{ nota.productos.all|sum:'total'|formatear_numero_ingles }}</p>
+</body>
+</html>

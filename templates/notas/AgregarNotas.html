@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Clientes{% endblock %}
+{% block title %}Notas{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -10,88 +10,85 @@
                     <div class="card-bdoy p-4">
                         
                         <h1><i class="bi bi-plus-lg"></i> Nueva Nota</h1>
-                        <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                        <label class="form-check-label" for="checkDefault">
-                            IVA
-                        </label>
-                        </div>
-                        
-                        <div class="row mt-5">
-                            <div class="col-md-6 mb-3">
-                            <label class="form-label">NO De trabajo</label>
-                            <input type="text" class="form-control">
-                        </div>
+                        <form method="POST" action="{% url 'guardar_nota' %}" id="notaForm">
+  {% csrf_token %}
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Contacto</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        </div>
+  <div class="form-check mb-3">
+    {{ form.incluye_iva.label_tag }}
+    {{ form.incluye_iva }}
+  </div>
 
-                        <div class="row">
-                           
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      {{ form.no_trabajo.label_tag }} {{ form.no_trabajo }}
+    </div>
+    <div class="col-md-6 mb-3">
+      {{ form.contacto.label_tag }} {{ form.contacto }}
+    </div>
+    <div class="col-md-6 mb-3">
+      {{ form.telefono.label_tag }} {{ form.telefono }}
+    </div>
+    <div class="col-md-6 mb-3">
+      {{ form.fecha.label_tag }} {{ form.fecha }}
+    </div>
+     <div class="col-md-6 mb-3">
+      {{ form.factura.label_tag }} {{ form.factura }}
+    </div>
+    <div class="col-md-4 mb-3">
+      {{ form.tipo.label_tag }} {{ form.tipo }}
+    </div>
+    <div class="col-md-4 mb-3">
+      {{ form.entrega.label_tag }} {{ form.entrega }}
+    </div>
+    <div class="col-md-4 mb-3">
+      {{ form.pago.label_tag }} {{ form.pago }}
+    </div>
+  </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">telefono</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Fecha</label>
-                            <input type="date" class="form-control">
-                        </div>
-                        </div>
-
-                        <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Tipo</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Entrega</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Pago</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">Trasferencia</option>
-                                <option value="2">Tarjeta De Credito</option>
-                                <option value="3">Tarjeta De Debito</option>
-                                <option value="3">Efectivo</option>
-                            </select>
-                        </div>
-                        </div>
-                        <table class="table">
+  <!-- tablaNotas y modal igual como ya lo tienes -->
+  <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nombre Del Producto</th>
+      <th scope="col">Producto</th>
       <th scope="col">Cantidad</th>
       <th scope="col">Precio</th>
+      <th scope="col">Total</th>
       <th scope="col">Anticipo</th>
-      <th scope="col">
-        Total
-        
-    </th>
-    <th>
-        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <i class="bi bi-plus-lg"></i>
-        </button>
-    </th>
+      <th>
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <i class="bi bi-plus"></i>
+</button>
+      </th>
     </tr>
   </thead>
-  <tbody>
-    
+  <tbody id="tablaNotas">
+
   </tbody>
+    <tfoot>
+    <tr>
+      <th colspan="4" class="text-end">Total general:</th>
+      <th id="sumaTotal">0</th>
+    </tr>
+
+    <tr>
+      <th colspan="4" class="text-end">Anticipo:</th>
+      <th><input type="text" id="totalInput" class="form-control" placeholder="Anticipo"></th>
+    </tr>
+    <tr>
+      <th colspan="4" class="text-end">Subtotal:</th>
+      <th id="ivaSubtotal" style="color: red; font-weight: bold;">0.00</th>
+    </tr>
+
+    <tr>
+      <th colspan="4" class="text-end">Restan:</th>
+      <th id="restanteTotal">0</th>
+    </tr>
+  </tfoot>
 </table>
+
+  <button type="submit" class="btn btn-success mt-3" id="guardarNotaBtn">Guardar Nota</button>
+</form>
 
 
 <!-- Modal -->
@@ -104,17 +101,17 @@
       </div>
       <div class="modal-body">
         <label class="form-label">Producto</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="productoInput">
 
         <label class="form-label">Cantidad</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="cantidadInput">
 
         <label class="form-label">Precio</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="precioInput">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Agregar</button>
+        <button type="button" class="btn btn-primary" id="agregarBtn">Agregar</button>
       </div>
     </div>
   </div>
@@ -125,4 +122,6 @@
         </div>
     </div>
 
+{% load static %}
+<script src="{% static 'notas/js/notas.js' %}"></script>
 {% endblock %}

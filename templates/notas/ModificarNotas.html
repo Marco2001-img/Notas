@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Clientes{% endblock %}
+{% block title %}Notas{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -9,101 +9,107 @@
                 <div class="card">
                     <div class="card-bdoy p-4">
                         
-                        <h1> Actualizar Nota</h1>
-                        <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                        <label class="form-check-label" for="checkDefault">
-                            IVA
-                        </label>
-                        </div>
-                        
-                        <div class="row mt-5">
-                            <div class="col-md-6 mb-3">
-                            <label class="form-label">NO De trabajo</label>
-                            <input type="text" class="form-control">
-                        </div>
+                        <h1><i class="bi bi-plus-lg"></i> Actualizar Nota</h1>
+                        <form method="post" action="{% url 'editar_nota' nota.id %}" id="notaForm">
+  {% csrf_token %}
+  
+  {{ form.as_p }}  
+ 
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Contacto</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        </div>
+  <!-- tablaNotas y modal igual como ya lo tienes -->
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Total</th>
+      <th scope="col">Anticipo</th>
+      <th>
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <i class="bi bi-plus"></i>
+</button>
+      </th>
+    </tr>
+  </thead>
+   <tbody id="tablaNotas">
+    {% for p in productos %}
+      <tr data-producto-id="{{ p.id }}">
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.cantidad }}</td>
+        <td>{{ p.precio }}</td>
+        <td>{{ p.total }}</td>
+        <td><button type="button" class="btn btn-danger btn-delete">
+          <i class="bi bi-trash"></i> Eliminar
+        </button></td>
 
-                        <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">telefono</label>
-                            <input type="text" class="form-control">
-                        </div>
+      </tr>
+    {% endfor %}
+  </tbody>
+    <tfoot>
+    <tr>
+      <th colspan="4" class="text-end">Total general:</th>
+      <th id="sumaTotal">{{ total  }}</th>
+    </tr>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Fecha</label>
-                            <input type="date" class="form-control">
-                        </div>
-                        </div>
+    <tr>
+      <th colspan="4" class="text-end">Anticipo:</th>
+      <th><input type="text" id="totalInput" class="form-control" placeholder="Anticipo"  value="{{  anticipo  }}"></th>
+    </tr>
+    <tr>
+      <th colspan="4" class="text-end">Subtotal:</th>
+      <th id="ivaSubtotal" style="color: red; font-weight: bold;"
+      >{{ iva  }}</th>
+    </tr>
 
-                        <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Tipo</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
+    <tr>
+      <th colspan="4" class="text-end">Restan:</th>
+      <th id="restanteTotal">{{ restante }}</th>
+    </tr>
+  </tfoot>
+</table>
 
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Entrega</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Pago</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">Trasferencia</option>
-                                <option value="2">Tarjeta De Credito</option>
-                                <option value="3">Tarjeta De Debito</option>
-                                <option value="3">Efectivo</option>
-                            </select>
-                        </div>
-                        
-                         <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Nombre Del Producto</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Cantidad</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label">Precio</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                         <div class="row">
-                        <div class="col-md-6 mb-6">
-                            <label class="form-label">Anticipo</label>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="col-md-6 mb-6">
-                            <label class="form-label">Total</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-outline-dark my-4">Actualizar</button>
-                        </div>
-                        </div>
+  <button type="submit" class="btn btn-success mt-3" id="actualizarNotaBtn">Actualizar Nota</button>
+</form>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Nota</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Producto</label>
+        <input type="text" class="form-control" id="productoInput">
+
+        <label class="form-label">Cantidad</label>
+        <input type="text" class="form-control" id="cantidadInput">
+
+        <label class="form-label">Precio</label>
+        <input type="text" class="form-control" id="precioInput">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="agregarBtn">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+{% load static %}
+<script>
+  const notaId = "{{ nota.id }}";  // id de la nota actual
+</script>
+<script src="{% static 'notas/js/notas.js' %}"></script>
+<script src="{% static 'notas/js/actualizar_nota.js' %}"></script>
 {% endblock %}

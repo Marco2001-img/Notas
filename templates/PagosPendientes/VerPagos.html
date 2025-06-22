@@ -5,29 +5,21 @@
 {% block content %}
 <div class="container">
     <h1>Pagos Pendientes</h1>
+    <a href="{% url 'pagos_pdf' %}" class="btn btn-danger my-3" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+
    <div class="row">
-            <div class="col-6">
+            <div class="col-5">
                 <div class="card p-4">
                     <div class="card-body">
-                        <label>Titulo Del Pago</label>
-                        <input type="text" class="form-control">
-
-                        <label>Descripcion</label>
-                        <input type="text" class="form-control">
-
-                        <label>Fecha De Pago</label>
-                        <input type="date" class="form-control">
-
-                        <label>Costo</label>
-                        <input type="text" class="form-control">
-
-                        <button type="button" class="btn btn-dark my-3">Añadir Pago</button>
-
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-dark my-3">Añadir Pago</button>
+                        </form>
                     </div>
                 </div>
-
             </div>
-            <div class="col-6">
+            <div class="col-7">
                 <table class="table">
   <thead>
     <tr>
@@ -39,16 +31,39 @@
     </tr>
   </thead>
   <tbody>
+  {% for pago in pagos %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td><a href="#" class="btn btn-success"><i class="bi bi-check-lg"></i></td></a> 
-      <td><a href="{% url 'modificar_pago' %}" class="btn btn-warning"><i class="bi bi-eye-fill"></i></td></a> 
+      <td>{{ pago.titulo }}</td>
+      <td>{{ pago.descripcion }}</td>
+      <td>$ {{ pago.costo }}</td>
+      <td>{{ pago.fecha_pago }}</td>
+      <td><a href="{% url 'eliminar_pago' pago.id %}" class="btn btn-success"><i class="bi bi-check-lg"></i></td></a> 
+      <td><a href="{% url 'modificar_pago' pago.id %}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a></td>
+     
     </tr>
+      {% empty %}
+      <tr><td colspan="5">No hay pagos pendientes.</td></tr>
+      {% endfor %}
   </tbody>
 </table>
+
+  {% block scripts %}
+{% if messages %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  {% for message in messages %}
+  Swal.fire({
+    title: "Éxito",
+    text: "{{ message|escapejs }}",
+    icon: "success",
+    confirmButtonText: "OK"
+  });
+  {% endfor %}
+});
+</script>
+{% endif %}
+{% endblock %}
+
 
             </div>
         </div>
