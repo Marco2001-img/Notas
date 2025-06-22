@@ -1,5 +1,7 @@
-- Business Management System with Django
-🛠️ Project Description
+# Business Management System with Django
+
+🛠️ **Project Description**
+
 This business management system is built with Django (Python) and is designed for small and medium-sized enterprises. It consists of four main modules to help manage clients, pending payments, employees, and operational notes. Its purpose is to optimize internal processes, improve information traceability, and centralize operations through a single administrative panel.
 
 🔍 Main Modules
