@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.shortcuts import redirect
 
 urlpatterns = [
+    path('', lambda request: redirect('/clientes/verClientes/', permanent=False)),
     path('admin/', admin.site.urls),
     path('empleados/', include('empleados.urls')),
     path('clientes/', include('clientes.urls')),
