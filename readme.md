@@ -40,11 +40,11 @@ Export notes to professional PDF format for client delivery
 💼 Technologies Used
 Backend: Django 4.x
 
-Frontend: HTML, CSS, JavaScript
+Frontend: HTML, CSS, JavaScript,Bootstrap
 
 PDF Generation: ReportLab
 
-Database: SQLite (development), compatible with PostgreSQL/MySQL
+Database:  PostgreSQL
 
 Security: Django's built-in CSRF and validation protection
 
